@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int MAX = 100000;
+
+        long[] freq = new long[MAX + 1];
+
+        for (int i = 0; i < n; i++) {
+            int x = sc.nextInt();
+            freq[x]++;
+        }
+
+        long[] dp = new long[MAX + 1];
+
+        dp[1] = freq[1] * 1;
+
+        for (int i = 2; i <= MAX; i++) {
+            dp[i] = Math.max(dp[i - 1], dp[i - 2] + i * freq[i]);
+        }
+
+        System.out.println(dp[MAX]);
+    }
+}
